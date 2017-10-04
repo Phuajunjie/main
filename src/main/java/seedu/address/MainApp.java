@@ -15,11 +15,14 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ListAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -205,6 +208,15 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
+    @Subscribe
+   public void handleListAppRequestEvent(ListAppRequestEvent event) {
+       logger.info(LogsCenter.getEventHandlingLogMessage(event));
+       try {
+           logic.execute("list");
+       } catch (CommandException | ParseException e) {
+           logger.info("Invalid command: ");
+       }
+   }
 
     public static void main(String[] args) {
         launch(args);

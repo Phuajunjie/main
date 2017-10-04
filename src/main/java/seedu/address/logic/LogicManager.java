@@ -40,7 +40,8 @@ public class LogicManager extends ComponentManager implements Logic {
             CommandResult result = command.execute();
             undoRedoStack.push(command);
             return result;
-        } finally {
+        }
+        finally {
             history.add(commandText);
         }
     }

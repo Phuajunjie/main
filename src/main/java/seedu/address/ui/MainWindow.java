@@ -18,6 +18,8 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ListAppRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
@@ -202,6 +204,11 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+    @FXML
+    private void handleList() {
+        raise(new ListAppRequestEvent());
+        raise(new NewResultAvailableEvent("Listed all persons through menu"));
     }
 
     public PersonListPanel getPersonListPanel() {
